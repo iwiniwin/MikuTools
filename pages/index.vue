@@ -63,20 +63,10 @@
 
         <nya-container v-if="!$store.state.setting.hideNotice" v-show="!searchText" title="公告" icon="volume-down-outline">
             <ul class="nya-list">
-                <li>本项目基于 <a href="https://github.com/Ice-Hazymoon/MikuTools" target="_blank" rel="noopener noreferrer">MikuTools</a> 构建而成</li>
-                <li>
-                    <div class="badge-info">
-                        <span class="badge hot">热门</span> <span class="badge vip">VIP</span> <span class="badge new">新功能</span> <span class="badge recommend">推荐</span>
-                    </div>
-                </li>
-                <li><b>欢迎将本站收藏到收藏夹，以便以后使用</b></li>
-                <li>
-                    本站域名：<a
-                        :href="$store.state.env.url"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >{{ $store.state.env.domain }}</a>
-                </li>
+                <li>在未获得明确书面同意以及未按照本公告规定的情况下，请勿使用本网站内容。</li>
+                <li>请勿为了公共或商业目的散发、下载、修改、转播、再使用、再发布或使用本网站资料。</li>
+                <li>您将自行承担使用本网站的风险。</li>
+                <li>禁止更改、损害或丑化本网站或在本网站上增加任何未经许可的资料。</li>
                 <li v-if="$store.state.isMobile.any">
                     如果遇到无法使用或者样式问题，请更换浏览器后重试，推荐使用 Chrome 浏览器，对 iOS 设备兼容性可能不太好
                 </li>
