@@ -56,7 +56,6 @@
             <div v-if="$store.state.setting.bg.layer" class="bg-layer"></div>
             <Navbar />
             <nuxt class="view" />
-            <Vfooter v-show="$route.path === '/'" />
         </main>
         <!-- 自定义CSS -->
         <style v-if="$store.state.setting.css">
@@ -70,7 +69,6 @@
         <div v-show="$store.state.globalLoading" class="view-loading">
             <nya-loading />
         </div>
-        <FloatBtn />
         <ThemeBtn />
     </div>
 </template>
@@ -78,17 +76,13 @@
 <script>
 import Navbar from '../components/Navbar';
 import Dialog from '../components/Dialog';
-import FloatBtn from '../components/FloatBtn';
 import isMobile from 'ismobilejs';
-import Vfooter from '~/components/Footer';
 import ThemeBtn from '~/components/ThemeBtn';
 export default {
     name: 'Index',
     components: {
         Navbar,
         Dialog,
-        FloatBtn,
-        Vfooter,
         ThemeBtn
     },
     data() {
