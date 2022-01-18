@@ -1,6 +1,5 @@
 <template>
     <div class="home">
-        <Welcome />
         <Search v-model="searchText" @enter="enterFirst">
             <template slot-scope="data">
                 <nuxt-link
@@ -113,13 +112,11 @@
 import Favorites from '~/components/Favorites';
 import Search from '~/components/Search';
 import isMobile from 'ismobilejs';
-import Welcome from '~/components/Welcome';
 export default {
     name: 'Home',
     components: {
         Favorites,
-        Search,
-        Welcome
+        Search
     },
     head() {
         return {
