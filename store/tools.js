@@ -150,6 +150,234 @@ export const state = () => {
             ]
         },
         {
+            title: '编程开发',
+            icon: 'code-outline',
+            list: [
+                {
+                    name: '时间戳转换',
+                    path: '/timestamp',
+                    head: {
+                        keywords: ['时间戳转换', '时间戳获取'],
+                        description: '在线时间戳转换|格式化工具'
+                    }
+                },
+                {
+                    name: '文本加密解密',
+                    path: '/crypto',
+                    head: {
+                        keywords: [
+                            '文本加密解密',
+                            '文本哈希计算',
+                            'MD5加密',
+                            'AES',
+                            'DES',
+                            'HmacMD5',
+                            'HmacSHA1',
+                            'HmacSHA256',
+                            'HmacSHA512',
+                            'RC4',
+                            'RC4Drop',
+                            'RIPEMD160',
+                            'Rabbit',
+                            'SHA1',
+                            'SHA256',
+                            'SHA3',
+                            'TripleDES'
+                        ],
+                        description: '在线文本哈希散列计算'
+                    }
+                },
+                {
+                    name: '文本编码解码',
+                    path: '/encoding',
+                    head: {
+                        keywords: [
+                            '文本编码解码',
+                            '文本base64编码',
+                            '社会主义核心价值观加密'
+                        ],
+                        description: '在线文本编码解码'
+                    }
+                },
+                {
+                    name: 'Linux 命令查询',
+                    path: '/linux_command',
+                    head: {
+                        keywords: ['Linux命令查询'],
+                        description: '在线Linux命令查询'
+                    }
+                },
+                {
+                    name: '正则大全',
+                    path: '/any_rule',
+                    head: {
+                        keywords: ['正则大全'],
+                        description: '正则大全'
+                    }
+                },
+                {
+                    name: 'JSON 编辑器',
+                    path: '/json_editor',
+                    head: {
+                        keywords: ['在线JSON编辑器', 'JSON格式化', 'JSON压缩'],
+                        description: '在线JSON编辑器'
+                    }
+                },
+                {
+                    name: 'CSS 兼容性处理',
+                    path: '/autoprefixer',
+                    head: {
+                        keywords: ['CSS兼容性处理', 'autoprefixer', 'postcss'],
+                        description: '在线CSS兼容性处理'
+                    }
+                },
+                {
+                    name: 'URL 格式化',
+                    path: '/url_format',
+                    head: {
+                        keywords: ['URL 格式化', 'URL参数查看'],
+                        description: '在线URL格式化'
+                    }
+                },
+                {
+                    name: '执行 Cron 表达式',
+                    path: '/crontab',
+                    head: {
+                        keywords: ['在线执行Cron表达式', '在线模拟Cron表达式'],
+                        description: '在线执行Cron表达式'
+                    }
+                },
+                {
+                    name: '进制转换',
+                    path: '/hexconvert',
+                    head: {
+                        keywords: [
+                            '进制转换',
+                            '二进制转换',
+                            '八进制转换',
+                            '十进制转换',
+                            '十六进制转换',
+                            '三十二进制转换'
+                        ],
+                        description: '在线进制转换'
+                    }
+                },
+                {
+                    name: 'CIDR 计算',
+                    path: '/cidr',
+                    head: {
+                        keywords: [
+                            'CIDR',
+                            'IP',
+                            '网络ID',
+                            'IP地址',
+                            '子网掩码',
+                            '广播地址'
+                        ],
+                        description: '在线CIDR计算'
+                    }
+                },
+                {
+                    name: 'UserAgent 解析',
+                    path: '/ua_parser',
+                    head: {
+                        keywords: ['在线 UserAgent 解析'],
+                        description: 'UserAgent 解析'
+                    }
+                },
+                {
+                    name: '前端 CDN 查询',
+                    path: '/cdnjs',
+                    head: {
+                        keywords: [
+                            '前端CDN',
+                            'CDNJS',
+                            'BootCDN',
+                            'CSS.NET',
+                            'Baomitu CDN',
+                            'Staticfile CDN'
+                        ],
+                        description: '前端CDN库查询'
+                    }
+                }
+            ]
+        },
+        {
+            title: '文字处理',
+            icon: 'text-outline',
+            list: [
+                {
+                    name: '摩斯电码转换',
+                    path: '/morse',
+                    head: {
+                        keywords: ['摩斯电码转换', '中文摩斯电码转换'],
+                        description: '在线摩斯电码转换'
+                    }
+                },
+                {
+                    name: '文本对比',
+                    path: '/textdiff',
+                    head: {
+                        keywords: ['文本对比', '代码对比'],
+                        description: '文本在线对比'
+                    }
+                },
+                {
+                    name: '文本去重',
+                    path: '/remove_duplicate',
+                    head: {
+                        keywords: ['文本在线去重', '文本去除重复'],
+                        description: '文本在线去重'
+                    }
+                },
+                {
+                    name: '数字转大写中文',
+                    path: '/number_to_zh',
+                    head: {
+                        keywords: [
+                            '数字转大写中文',
+                            '中文金额转换',
+                            '人民币转中文',
+                            '中文转人民币'
+                        ],
+                        description: '在线人民币转中文'
+                    }
+                },
+                {
+                    name: '富文本编辑器',
+                    path: '/rich_text_editor',
+                    head: {
+                        keywords: ['富文本编辑器'],
+                        description: '在线富文本编辑器'
+                    }
+                },
+                {
+                    name: 'Markdown 编辑器',
+                    path: '/markdown',
+                    head: {
+                        keywords: ['Markdown编辑器'],
+                        description: '在线Markdown编辑器'
+                    }
+                },
+                {
+                    name: '盲人摸象加解密',
+                    path: '/sot1_encrypt',
+                    head: {
+                        keywords: ['盲人摸象', '转码', '加解密'],
+                        description: '在线盲人摸象加解密'
+                    }
+                },
+                {
+                    name: '中英文加空格',
+                    path: '/text_autospace',
+                    head: {
+                        keywords: ['中英文加空格'],
+                        description: '在线中英文加空格'
+                    }
+                }
+            ]
+        },
+        {
             title: '图片相关',
             icon: 'image-outline',
             list: [
@@ -240,234 +468,6 @@ export const state = () => {
                             '图片加水印'
                         ],
                         description: '在线身份证加水印'
-                    }
-                }
-            ]
-        },
-        {
-            title: '文字处理',
-            icon: 'text-outline',
-            list: [
-                {
-                    name: '文本对比',
-                    path: '/textdiff',
-                    head: {
-                        keywords: ['文本对比', '代码对比'],
-                        description: '文本在线对比'
-                    }
-                },
-                {
-                    name: '文本去重',
-                    path: '/remove_duplicate',
-                    head: {
-                        keywords: ['文本在线去重', '文本去除重复'],
-                        description: '文本在线去重'
-                    }
-                },
-                {
-                    name: '数字转大写中文',
-                    path: '/number_to_zh',
-                    head: {
-                        keywords: [
-                            '数字转大写中文',
-                            '中文金额转换',
-                            '人民币转中文',
-                            '中文转人民币'
-                        ],
-                        description: '在线人民币转中文'
-                    }
-                },
-                {
-                    name: '富文本编辑器',
-                    path: '/rich_text_editor',
-                    head: {
-                        keywords: ['富文本编辑器'],
-                        description: '在线富文本编辑器'
-                    }
-                },
-                {
-                    name: 'Markdown 编辑器',
-                    path: '/markdown',
-                    head: {
-                        keywords: ['Markdown编辑器'],
-                        description: '在线Markdown编辑器'
-                    }
-                },
-                {
-                    name: '摩斯电码转换',
-                    path: '/morse',
-                    head: {
-                        keywords: ['摩斯电码转换', '中文摩斯电码转换'],
-                        description: '在线摩斯电码转换'
-                    }
-                },
-                {
-                    name: '盲人摸象加解密',
-                    path: '/sot1_encrypt',
-                    head: {
-                        keywords: ['盲人摸象', '转码', '加解密'],
-                        description: '在线盲人摸象加解密'
-                    }
-                },
-                {
-                    name: '中英文加空格',
-                    path: '/text_autospace',
-                    head: {
-                        keywords: ['中英文加空格'],
-                        description: '在线中英文加空格'
-                    }
-                }
-            ]
-        },
-        {
-            title: '编程开发',
-            icon: 'code-outline',
-            list: [
-                {
-                    name: 'CSS 兼容性处理',
-                    path: '/autoprefixer',
-                    head: {
-                        keywords: ['CSS兼容性处理', 'autoprefixer', 'postcss'],
-                        description: '在线CSS兼容性处理'
-                    }
-                },
-                {
-                    name: '时间戳转换',
-                    path: '/timestamp',
-                    head: {
-                        keywords: ['时间戳转换', '时间戳获取'],
-                        description: '在线时间戳转换|格式化工具'
-                    }
-                },
-                {
-                    name: 'URL 格式化',
-                    path: '/url_format',
-                    head: {
-                        keywords: ['URL 格式化', 'URL参数查看'],
-                        description: '在线URL格式化'
-                    }
-                },
-                {
-                    name: '文本加密解密',
-                    path: '/crypto',
-                    head: {
-                        keywords: [
-                            '文本加密解密',
-                            '文本哈希计算',
-                            'MD5加密',
-                            'AES',
-                            'DES',
-                            'HmacMD5',
-                            'HmacSHA1',
-                            'HmacSHA256',
-                            'HmacSHA512',
-                            'RC4',
-                            'RC4Drop',
-                            'RIPEMD160',
-                            'Rabbit',
-                            'SHA1',
-                            'SHA256',
-                            'SHA3',
-                            'TripleDES'
-                        ],
-                        description: '在线文本哈希散列计算'
-                    }
-                },
-                {
-                    name: 'Linux 命令查询',
-                    path: '/linux_command',
-                    head: {
-                        keywords: ['Linux命令查询'],
-                        description: '在线Linux命令查询'
-                    }
-                },
-                {
-                    name: '文本编码解码',
-                    path: '/encoding',
-                    head: {
-                        keywords: [
-                            '文本编码解码',
-                            '文本base64编码',
-                            '社会主义核心价值观加密'
-                        ],
-                        description: '在线文本编码解码'
-                    }
-                },
-                {
-                    name: '执行 Cron 表达式',
-                    path: '/crontab',
-                    head: {
-                        keywords: ['在线执行Cron表达式', '在线模拟Cron表达式'],
-                        description: '在线执行Cron表达式'
-                    }
-                },
-                {
-                    name: '进制转换',
-                    path: '/hexconvert',
-                    head: {
-                        keywords: [
-                            '进制转换',
-                            '二进制转换',
-                            '八进制转换',
-                            '十进制转换',
-                            '十六进制转换',
-                            '三十二进制转换'
-                        ],
-                        description: '在线进制转换'
-                    }
-                },
-                {
-                    name: 'CIDR 计算',
-                    path: '/cidr',
-                    head: {
-                        keywords: [
-                            'CIDR',
-                            'IP',
-                            '网络ID',
-                            'IP地址',
-                            '子网掩码',
-                            '广播地址'
-                        ],
-                        description: '在线CIDR计算'
-                    }
-                },
-                {
-                    name: 'UserAgent 解析',
-                    path: '/ua_parser',
-                    head: {
-                        keywords: ['在线 UserAgent 解析'],
-                        description: 'UserAgent 解析'
-                    }
-                },
-                {
-                    name: '前端 CDN 查询',
-                    path: '/cdnjs',
-                    head: {
-                        keywords: [
-                            '前端CDN',
-                            'CDNJS',
-                            'BootCDN',
-                            'CSS.NET',
-                            'Baomitu CDN',
-                            'Staticfile CDN'
-                        ],
-                        description: '前端CDN库查询'
-                    }
-                },
-                {
-                    name: 'JSON 编辑器',
-                    path: '/json_editor',
-                    head: {
-                        keywords: ['在线JSON编辑器', 'JSON格式化', 'JSON压缩'],
-                        description: '在线JSON编辑器'
-                    }
-                },
-                {
-                    name: '正则大全',
-                    path: '/any_rule',
-                    head: {
-                        keywords: ['正则大全'],
-                        description: '正则大全'
                     }
                 }
             ]
