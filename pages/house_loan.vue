@@ -28,8 +28,16 @@
 </template>
 
 <script>
+let DatePicker;
+if (process.browser) {
+    DatePicker = require('vue2-datepicker').default;
+}
+import dayjs from 'dayjs';
 export default {
     name: 'HouseLoan',
+    components: {
+        DatePicker
+    },
     head() {
         return this.$store.state.currentTool.head;
     },
