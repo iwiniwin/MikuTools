@@ -70,12 +70,6 @@
             </div>
         </nya-container>
 
-        <nya-container v-if="results" title="分享链接">
-            <nya-copy :copy="share + '\n这是我的人生进度，你也快来查询一下吧~'">
-                <div v-text="share"></div>
-            </nya-copy>
-        </nya-container>
-
         <nya-container title="说明">
             <li><small>参考了小程序<b> lifecount </b>而制作的网页版本</small></li>
             <li><b>假设我们的寿命是80岁,分为400个方块。</b></li>

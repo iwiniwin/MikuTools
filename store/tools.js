@@ -42,7 +42,7 @@ export const state = () => {
                     }
                 },
                 {
-                    name: '图片加包浆',
+                    name: '图片做旧',
                     path: '/image_patina',
                     head: {
                         keywords: [
@@ -52,27 +52,6 @@ export const state = () => {
                             '表情包包浆'
                         ],
                         description: '图片包浆'
-                    }
-                },
-                {
-                    name: 'LINE 贴纸下载',
-                    path: '/line_sticker_download',
-                    head: {
-                        keywords: [
-                            '怎么下载LINE表情包',
-                            '怎么下载LINE贴纸',
-                            '怎么保存LINE表情包',
-                            'LINE表情包png'
-                        ],
-                        description: 'LINE贴纸在线下载'
-                    }
-                },
-                {
-                    name: '帮你百度',
-                    path: '/search_help',
-                    head: {
-                        keywords: ['帮你百度', '怎么用百度', '怎么用谷歌'],
-                        description: '帮你百度'
                     }
                 },
                 {
@@ -117,14 +96,6 @@ export const state = () => {
                     head: {
                         keywords: ['中国传统色'],
                         description: '中国传统色'
-                    }
-                },
-                {
-                    name: '日本传统色',
-                    path: '/japan_colors',
-                    head: {
-                        keywords: ['日本传统色', '日本の伝統色'],
-                        description: '日本传统色'
                     }
                 },
                 {
@@ -199,26 +170,6 @@ export const state = () => {
                     }
                 },
                 {
-                    name: 'Cyberpunk 2077 图片制作',
-                    path: '/cyberpunk2077',
-                    head: {
-                        keywords: [
-                            'Cyberpunk2077',
-                            '赛博朋克2077',
-                            'Cyberpunk 2077 meme'
-                        ],
-                        description: '在线Cyberpunk 2077风格图片制作'
-                    }
-                },
-                {
-                    name: '令和举牌生成',
-                    path: '/linghe',
-                    head: {
-                        keywords: ['令和举牌风格图片制作'],
-                        description: '在线令和举牌风格图片制作'
-                    }
-                },
-                {
                     name: 'ACG 表情包制作',
                     path: '/acg_meme',
                     head: {
@@ -229,14 +180,6 @@ export const state = () => {
                             '啥玩意儿啊'
                         ],
                         description: '在线动漫表情包制作'
-                    }
-                },
-                {
-                    name: 'Pornhub 风格Logo',
-                    path: '/pornhub_logo',
-                    head: {
-                        keywords: ['PornHub 风格图片制作', 'PornHub Logo 制作'],
-                        description: '在线 PornHub 风格图片制作'
                     }
                 },
                 {
@@ -288,7 +231,7 @@ export const state = () => {
                     }
                 },
                 {
-                    name: '身份证加水印',
+                    name: '图片加水印',
                     path: '/watermark',
                     head: {
                         keywords: [
