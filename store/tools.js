@@ -5,6 +5,14 @@ export const state = () => {
             icon: 'layers-outline',
             list: [
                 {
+                    name: '房贷计算器',
+                    path: '/house_loan',
+                    head: {
+                        keywords: ['房贷计算器', '提前还贷'],
+                        description: '房贷计算器'
+                    }
+                },
+                {
                     name: '屏幕录制',
                     path: '/screen_record',
                     head: {
