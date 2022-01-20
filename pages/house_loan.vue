@@ -1,18 +1,18 @@
 <template>
     <div class="house_loan">
         <nya-container title="房贷计算器">
-            <nya-input v-model.trim="loanAmount" fullwidth type="number" label="贷款金额（万元）" autofocus placeholder="258" autocomplete="off" />
-            <nya-input v-model.trim="loanTerm" fullwidth type="number" label="贷款期限（年）" autofocus placeholder="30" autocomplete="off" />
-            <nya-input v-model.trim="loanRate" fullwidth type="number" label="贷款利率（%）" autofocus placeholder="5.45" autocomplete="off" />
+            <nya-input v-model.trim="loanAmount" fullwidth type="number" label="贷款金额（万元）" placeholder="258" autocomplete="off" />
+            <nya-input v-model.trim="loanTerm" fullwidth type="number" label="贷款期限（年）" placeholder="30" autocomplete="off" />
+            <nya-input v-model.trim="loanRate" fullwidth type="number" label="贷款利率（%）" placeholder="5.45" autocomplete="off" />
             <nya-checkbox v-model="choosePrepayment" class="mb-15" label="提前还款" />
             <br>
             <div v-if="choosePrepayment">
                 <client-only>
                     <label class="input-title">第一次还款时间</label>
-                    <date-picker v-model="firstRepaymentDate" class="nya-input" :editable="false" placeholder="第一次还款时间" :default-value="firstRepaymentDateDefaultValue" value-type="format" :not-before="from" :not-after="to" />
+                    <date-picker v-model="firstRepaymentDate" class="nya-input" :editable="false" :placeholder="`${firstRepaymentDate}`" value-type="format" :not-before="from" :not-after="to" />
                     <label class="input-title">预计提前还款时间</label>
-                    <date-picker v-model="intendedRepaymentDate" class="nya-input" :editable="false" placeholder="预计提前还款时间" :default-value="intendedRepaymentDateDefaultValue" value-type="format" :not-before="from" :not-after="to" />
-                    <nya-input v-model.trim="intendedRepaymentAmount" fullwidth type="number" label="预计提前还款金额（万元）" autofocus placeholder="30" autocomplete="off" />
+                    <date-picker v-model="intendedRepaymentDate" class="nya-input" :editable="false" :placeholder="`${intendedRepaymentDate}`" value-type="format" :not-before="from" :not-after="to" />
+                    <nya-input v-model.trim="intendedRepaymentAmount" fullwidth type="number" label="预计提前还款金额（万元）" placeholder="30" autocomplete="off" />
                 </client-only>
             </div>
             <button type="button" class="nya-btn" @click="calculate">
@@ -20,7 +20,56 @@
             </button>
         </nya-container>
         <nya-container v-show="result" :title="`计算结果`">
-            <pre>{{ result }}</pre>
+            <p>累计支付利息：{{ `12345${result}` }}</p>
+            <p>累计还款总额：{{ `12345${result}` }}</p>
+            <p>分期详情：</p>
+            <table width="90%" align="center">
+            <thead>
+                <tr>
+                    <th>期次</th>
+                    <th>偿还本息(元)</th>
+                    <th>偿还利息(元)</th>
+                    <th>偿还本金(元)</th>
+                    <th>剩余本金(元)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item) in vv">
+                    <td>{{ item }}</td>
+                    <td>{{ item }}</td>
+                    <td>333</td>
+                    <td>444</td>
+                    <td>555</td>
+                </tr>
+            </tbody>
+            </table>
+        </nya-container>
+        <nya-container v-show="result && choosePrepayment" :title="`提前还款结果`">
+            <p>已还利息额：{{ `12345${result}` }}</p>
+            <p>已还款总额：{{ `12345${result}` }}</p>
+            <p>节省利息支出：{{ `12345${result}` }}</p>
+            <p>该月还款额：{{ `12345${result}` }}</p>
+            <p>分期详情：</p>
+            <table width="90%" align="center">
+            <thead>
+                <tr>
+                    <th>期次</th>
+                    <th>偿还本息(元)</th>
+                    <th>偿还利息(元)</th>
+                    <th>偿还本金(元)</th>
+                    <th>剩余本金(元)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item) in vv">
+                    <td>{{ item }}</td>
+                    <td>{{ item }}</td>
+                    <td>333</td>
+                    <td>444</td>
+                    <td>555</td>
+                </tr>
+            </tbody>
+            </table>
         </nya-container>
         <nya-container title="说明">
             <ul class="nya-list">
@@ -52,21 +101,16 @@ export default {
             loanTerm: 30,
             loanRate: 5.45,
             choosePrepayment: false,
-            firstRepaymentDate: '',
-            intendedRepaymentDate: '',
+            firstRepaymentDate: dayjs('2021-05-05').format('YYYY-MM-DD'),
+            intendedRepaymentDate: dayjs('2023-05-05').format('YYYY-MM-DD'),
             intendedRepaymentAmount: 30,
-            firstRepaymentDateDefaultValue: dayjs()
-                .subtract(18, 'year')
-                .format('YYYY-MM-DD'),
-            intendedRepaymentDateDefaultValue: dayjs()
-                .subtract(18, 'year')
-                .format('YYYY-MM-DD'),
             from: dayjs()
-                .subtract(78, 'year')
+                .subtract(80, 'year')
                 .toDate(),
             to: dayjs()
-                .subtract(1, 'year')
+                .add(80, 'year')
                 .toDate(),
+            vv: ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c'],
             result: '' //输出的结果
         };
     },
@@ -94,9 +138,27 @@ export default {
     }
     .input-title {
         display: block;
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 10px;
         font-weight: bold;
+    }
+    table tbody {
+        display:block;
+        height:195px;
+        overflow-y:scroll;
+        text-align: center;
+    }
+    table thead, tbody tr {
+        display:table;
+        width:100%;
+        table-layout:fixed;
+        border-bottom:1px solid;
+    }
+    tbody tr {
+        border-bottom:1px dashed;
+    }
+    table thead {
+        width: calc( 100% - 0.5em );
     }
 }
 </style>
