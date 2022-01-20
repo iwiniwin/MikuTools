@@ -20,8 +20,8 @@
             </button>
         </nya-container>
         <nya-container v-show="result" :title="`计算结果`">
-            <p>累计支付利息：{{ `12345${result}` }}</p>
-            <p>累计还款总额：{{ `12345${result}` }}</p>
+            <p>累计支付利息：{{ `${result.totalInterest}` }}</p>
+            <p>累计还款总额：{{ `${result.totalRepayment}` }}</p>
             <p>分期详情：</p>
             <table width="90%" align="center">
             <thead>
@@ -34,17 +34,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item) in vv">
-                    <td>{{ item }}</td>
-                    <td>{{ item }}</td>
-                    <td>333</td>
-                    <td>444</td>
-                    <td>555</td>
+                <tr v-for="index of ${result.months}" :key="index">
+                    <td>{{ index }}</td>
+                    <td>{{ result.monthRepayment }}</td>
+                    <td>{{ calcMonthInterest(index) }}</td>
+                    <td>{{ result.monthRepayment - calcMonthInterest(index) }}</td>
+                    <td>{{ calcRemainingAmount(index) }}</td>
                 </tr>
             </tbody>
             </table>
         </nya-container>
-        <nya-container v-show="result && choosePrepayment" :title="`提前还款结果`">
+        <nya-container v-show="false && result && choosePrepayment" :title="`提前还款结果`">
             <p>已还利息额：{{ `12345${result}` }}</p>
             <p>已还款总额：{{ `12345${result}` }}</p>
             <p>节省利息支出：{{ `12345${result}` }}</p>
@@ -110,15 +110,34 @@ export default {
             to: dayjs()
                 .add(80, 'year')
                 .toDate(),
-            vv: ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c'],
-            result: '' //输出的结果
+            result: {} //输出的结果
         };
     },
     watch: {
     },
     methods: {
         calculate() {
-            this.result = 'abcd';
+            const monthRate = this.loanRate / 100 / 12;  // 月利率
+            const months = this.loanTerm * 12;   // 还款月数
+            const amount = this.loanAmount * 10000;  // 总贷款额
+            const value = Math.pow(1 + monthRate, months);
+            this.result.monthRepayment = amount * monthRate * value / (value - 1);  // 月均还款
+            this.result.totalRepayment = months * amount * monthRate * value / (value - 1);  // 还款总额
+            this.result.totalInterest = this.result.totalRepayment - amount;  // 利息总和
+            this.result.monthRate = monthRate;
+            this.result.months = months;
+            this.result.amount = amount;
+        },
+        calcMonthInterest(index) {
+            return (this.result.amount * this.result.monthRate - this.result.monthRepayment) * Math.pow(1 + this.result.monthRate, index - 1) + this.result.monthRepayment;
+        },
+        calcRemainingAmount(index) {
+            repaymentAmount = 0;
+            for (var i = 1; i <= this.result.months; i++)
+            { 
+                repaymentAmount += (this.result.monthRepayment - calcMonthInterest(index));
+            }
+            return this.result.amount - repaymentAmount;
         }
     }
 };
