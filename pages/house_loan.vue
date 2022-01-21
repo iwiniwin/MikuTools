@@ -20,8 +20,8 @@
             </button>
         </nya-container>
         <nya-container v-show="result.calculated" :title="`计算结果`">
-            <p>累计支付利息：{{ `${result.totalInterest}` }}</p>
-            <p>累计还款总额：{{ `${result.totalRepayment}` }}</p>
+            <p>累计支付利息：{{ `${toFixed2(result.totalInterest)}` 元 }}</p>
+            <p>累计还款总额：{{ `${toFixed2(result.totalRepayment)}` 元 }}</p>
             <p>分期详情：</p>
             <table width="90%" align="center">
             <thead>
@@ -34,17 +34,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="index of `${result.months}`" :key="index">
+                <tr v-for="index of result.months" :key="index">
                     <td>{{ `${index}` }}</td>
-                    <td>{{ `${result.monthRepayment}` }}</td>
-                    <td>{{ `${calcMonthInterest(index)}` }}</td>
-                    <td>{{ `${result.monthRepayment - calcMonthInterest(index)}` }}</td>
-                    <td>{{ `${calcRemainingAmount(index)}` }}</td>
+                    <td>{{ `${toFixed2(result.monthRepayment)}` }}</td>
+                    <td>{{ `${toFixed2(calcMonthInterest(index))}` }}</td>
+                    <td>{{ `${toFixed2(result.monthRepayment - calcMonthInterest(index))}` }}</td>
+                    <td>{{ `${toFixed2(calcRemainingAmount(index))}` }}</td>
                 </tr>
             </tbody>
             </table>
         </nya-container>
-        <nya-container v-show="false && choosePrepayment && result.calculated" :title="`提前还款结果`">
+        <nya-container v-show="choosePrepayment && result.prepayment.calculated" :title="`提前还款结果`">
             <p>已还利息额：{{ `12345${result}` }}</p>
             <p>已还款总额：{{ `12345${result}` }}</p>
             <p>节省利息支出：{{ `12345${result}` }}</p>
@@ -111,7 +111,10 @@ export default {
                 .add(80, 'year')
                 .toDate(),
             result: {
-                calculated: false
+                calculated: false,
+                prepayment: {
+                    calculated: false
+                }
             } //输出的结果
         };
     },
@@ -136,11 +139,18 @@ export default {
         },
         calcRemainingAmount(index) {
             var repaymentAmount = 0;
-            for (var i = 1; i <= this.result.months; i++)
+            for (var i = 1; i <= index; i++)
             { 
-                repaymentAmount += (this.result.monthRepayment - calcMonthInterest(index));
+                repaymentAmount += (this.result.monthRepayment - this.calcMonthInterest(i));
             }
             return this.result.amount - repaymentAmount;
+        },
+        toFixed2(num) {
+            if(typeof(num)=='undefined'){
+                return num
+            }else{
+                return num.toFixed(2)
+            }
         }
     }
 };
