@@ -9,9 +9,9 @@
             <div v-if="choosePrepayment">
                 <client-only>
                     <label class="input-title">第一次还款时间</label>
-                    <date-picker v-model="firstRepaymentDate" class="nya-input" :editable="false" :placeholder="`${firstRepaymentDate}`" value-type="format" :not-before="from" :not-after="to" />
+                    <date-picker v-model="firstRepaymentDate" class="nya-input" :editable="false" :placeholder="`${firstRepaymentDate}`" value-type="format" format="YYYY-MM" type="month" :not-before="from" :not-after="to" />
                     <label class="input-title">预计提前还款时间</label>
-                    <date-picker v-model="intendedRepaymentDate" class="nya-input" :editable="false" :placeholder="`${intendedRepaymentDate}`" value-type="format" :not-before="from" :not-after="to" />
+                    <date-picker v-model="intendedRepaymentDate" class="nya-input" :editable="false" :placeholder="`${intendedRepaymentDate}`" value-type="format" format="YYYY-MM" type="month" :not-before="from" :not-after="to" />
                     <nya-input v-model.trim="intendedRepaymentAmount" fullwidth type="number" label="预计提前还款金额（万元）" placeholder="30" autocomplete="off" />
                 </client-only>
             </div>
@@ -20,10 +20,10 @@
             </button>
         </nya-container>
         <nya-container v-show="result.calculated" :title="`计算结果`">
-            <p>累计支付利息：{{ `${toFixed2(result.totalInterest)}` 元 }}</p>
-            <p>累计还款总额：{{ `${toFixed2(result.totalRepayment)}` 元 }}</p>
+            <p>累计支付利息：{{ `${toFixed2(result.totalInterest)} 元` }}</p>
+            <p>累计还款总额：{{ `${toFixed2(result.totalRepayment)} 元` }}</p>
             <p>分期详情：</p>
-            <table width="90%" align="center">
+            <table class="detail-table" width="90%" align="center">
             <thead>
                 <tr>
                     <th>期次</th>
@@ -50,7 +50,7 @@
             <p>节省利息支出：{{ `12345${result}` }}</p>
             <p>该月还款额：{{ `12345${result}` }}</p>
             <p>分期详情：</p>
-            <table width="90%" align="center">
+            <table class="detail-table" width="90%" align="center">
             <thead>
                 <tr>
                     <th>期次</th>
@@ -101,8 +101,8 @@ export default {
             loanTerm: 30,
             loanRate: 5.45,
             choosePrepayment: false,
-            firstRepaymentDate: dayjs('2021-05-05').format('YYYY-MM-DD'),
-            intendedRepaymentDate: dayjs('2023-05-05').format('YYYY-MM-DD'),
+            firstRepaymentDate: dayjs('2021-05-05').format('YYYY-MM'),
+            intendedRepaymentDate: dayjs('2023-05-05').format('YYYY-MM'),
             intendedRepaymentAmount: 30,
             from: dayjs()
                 .subtract(80, 'year')
@@ -174,22 +174,22 @@ export default {
         margin-bottom: 10px;
         font-weight: bold;
     }
-    table tbody {
+    .detail-table tbody {
         display:block;
         height:195px;
         overflow-y:scroll;
         text-align: center;
     }
-    table thead, tbody tr {
+    .detail-table thead, .detail-table tbody tr {
         display:table;
         width:100%;
         table-layout:fixed;
         border-bottom:1px solid;
     }
-    tbody tr {
+    .detail-table tbody tr {
         border-bottom:1px dashed;
     }
-    table thead {
+    .detail-table thead {
         width: calc( 100% - 0.5em );
     }
 }
