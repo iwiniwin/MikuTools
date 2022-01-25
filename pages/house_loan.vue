@@ -53,7 +53,7 @@
             <p>剩余未还本金：{{ `${toFixed2(result.prepayment.loanInfo.totalRepayment - result.prepayment.loanInfo.totalInterest)} 元` }}</p>
             <p>节省利息支出：{{ `${toFixed2(result.loanInfo.totalInterest - calcPaidInterest(result.prepayment.pastMonths + 1, result.loanInfo) - result.prepayment.loanInfo.totalInterest)} 元` }}</p>
             <p>该月还款额：{{ `${toFixed2(result.prepayment.intendedAmount + result.loanInfo.monthRepayment)} 元` }}</p>
-            <p>剩余分期详情：</p>
+            <p>剩余分期{{ `（${result.loanInfo.months - result.prepayment.pastMonths - 1}期）` }}详情：</p>
             <table class="detail-table" width="90%" align="center">
             <thead>
                 <tr>
@@ -183,6 +183,7 @@ export default {
             if(typeof(num)=='undefined'){
                 return num
             }else{
+                num = Math.max(0, num)
                 return num.toFixed(2)
             }
         }
