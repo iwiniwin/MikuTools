@@ -45,11 +45,15 @@
             </table>
         </nya-container>
         <nya-container v-show="choosePrepayment && result.prepayment.calculated" :title="`提前还款结果`">
-            <p>已还利息额：{{ `${toFixed2(result.prepayment.paidInterest)} 元` }}</p>
             <p>已还款总额：{{ `${toFixed2(result.loanInfo.monthRepayment * result.prepayment.pastMonths)} 元` }}</p>
-            <p>节省利息支出：{{ `${toFixed2(result.loanInfo.monthRepayment * result.prepayment.pastMonths)} 元` }}</p>
-            <p>该月还款额：{{ `${toFixed2(result.loanInfo.monthRepayment * result.prepayment.pastMonths)} 元` }}</p>
-            <p>分期详情：</p>
+            <p>已还利息：{{ `${toFixed2(calcPaidInterest(result.prepayment.pastMonths, result.loanInfo))} 元` }}</p>
+            <p>已还本金：{{ `${toFixed2(result.loanInfo.monthRepayment * result.prepayment.pastMonths - calcPaidInterest(result.prepayment.pastMonths, result.loanInfo))} 元` }}</p>
+            <p>剩余未还款总额：{{ `${toFixed2(result.prepayment.loanInfo.totalRepayment)} 元` }}</p>
+            <p>剩余未还利息：{{ `${toFixed2(result.prepayment.loanInfo.totalInterest)} 元` }}</p>
+            <p>剩余未还本金：{{ `${toFixed2(result.prepayment.loanInfo.totalRepayment - result.prepayment.loanInfo.totalInterest)} 元` }}</p>
+            <p>节省利息支出：{{ `${toFixed2(result.loanInfo.totalInterest - calcPaidInterest(result.prepayment.pastMonths + 1, result.loanInfo) - result.prepayment.loanInfo.totalInterest)} 元` }}</p>
+            <p>该月还款额：{{ `${toFixed2(result.prepayment.intendedAmount + result.loanInfo.monthRepayment)} 元` }}</p>
+            <p>剩余分期详情：</p>
             <table class="detail-table" width="90%" align="center">
             <thead>
                 <tr>
@@ -62,7 +66,7 @@
             </thead>
             <tbody>
                 <tr v-for="index of result.prepayment.loanInfo.months" :key="index">
-                    <td>{{ `${index}` }}</td>
+                    <td>{{ `${index + result.prepayment.pastMonths + 1}` }}</td>
                     <td>{{ `${toFixed2(result.prepayment.loanInfo.monthRepayment)}` }}</td>
                     <td>{{ `${toFixed2(calcMonthInterest(index, result.prepayment.loanInfo))}` }}</td>
                     <td>{{ `${toFixed2(result.prepayment.loanInfo.monthRepayment - calcMonthInterest(index, result.prepayment.loanInfo))}` }}</td>
@@ -74,6 +78,7 @@
         <nya-container title="说明">
             <ul class="nya-list">
                 <li>还款方式默认为等额本息。</li>
+                <li>提前还款处理方式默认为减少月还款额，还款期限不变。</li>
             </ul>
         </nya-container>
     </div>
@@ -126,7 +131,7 @@ export default {
         calculateLoanInfo(yearRate, term, amount) {
             const loanInfo = {
                 monthRate: yearRate / 100 / 12,  // 月利率
-                months: term * 12, // 还款月数
+                months: term, // 还款月数
                 amount: amount,  // 总贷款额
                 monthRepayment: 0,
                 totalRepayment: 0,
@@ -139,19 +144,19 @@ export default {
             return loanInfo;
         },
         calculate() {
-            this.result.loanInfo = this.calculateLoanInfo(this.loanRate, this.loanTerm, this.loanAmount * 10000);
+            this.result.loanInfo = this.calculateLoanInfo(this.loanRate, this.loanTerm * 12, this.loanAmount * 10000);
             this.result.calculated = true;
             if(this.choosePrepayment) {
                 const firstDate = dayjs(this.firstRepaymentDate);
                 const intendedDate = dayjs(this.intendedRepaymentDate);
                 const pastMonths = intendedDate.diff(firstDate, 'month'); // 已经过去的时间(月)
                 const intendedAmount = this.intendedRepaymentAmount * 10000;  // 提前还款额
-                const remainingAmount = this.calcRemainingAmount(pastMonths, this.result.loanInfo);
+                const remainingAmount = this.calcRemainingAmount(pastMonths + 1, this.result.loanInfo);
                 const amount = remainingAmount - intendedAmount;  // 剩余贷款额
 
-                this.result.prepayment.paidInterest = this.result.loanInfo.amount - remainingAmount; //已还利息
+                this.result.prepayment.intendedAmount = intendedAmount;
                 this.result.prepayment.pastMonths = pastMonths;
-                this.result.prepayment.loanInfo = this.calculateLoanInfo(this.loanRate, this.loanTerm, amount);
+                this.result.prepayment.loanInfo = this.calculateLoanInfo(this.loanRate, this.loanTerm * 12 - pastMonths - 1, amount);
                 this.result.prepayment.calculated = true;
             }
         },
@@ -165,6 +170,14 @@ export default {
                 repaymentAmount += (loanInfo.monthRepayment - this.calcMonthInterest(i, loanInfo));
             }
             return loanInfo.amount - repaymentAmount;
+        },
+        calcPaidInterest(index, loanInfo) {
+            var interest = 0;
+            for (var i = 1; i <= index; i++)
+            { 
+                interest += this.calcMonthInterest(i, loanInfo);
+            }
+            return interest;
         },
         toFixed2(num) {
             if(typeof(num)=='undefined'){
