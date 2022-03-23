@@ -1,25 +1,18 @@
 <template>
     <div class="timestamp">
         <nya-container title="时间戳转换">
-            <div v-if="chooseManually">
-                <client-only>
-                    <date-picker v-model="date" type="datetime" class="nya-input date-picker mt-15" format="YYYY-MM-DD hh:mm:ss" confirm :editable="false" placeholder="选择日期" :default-value="defaultValue" value-type="timestamp" />
-                </client-only>
-            </div>
-            <div v-else>
-                <div class="inputbtn">
-                    <nya-input v-model.trim="current" fullwidth type="number" autofocus :label="`输入时间戳(${useSec ? '秒' : '毫秒'})`" :placeholder="`请输入时间戳(${useSec ? '秒' : '毫秒'})`" autocomplete="off" />
-                    <button type="button" class="nya-btn" @click="setDate">
-                        当前时间
-                    </button>
-                </div>
-                <nya-checkbox v-model="useSec" class="mt-15" label="使用秒(s)为单位" />
-            </div>
-            <nya-checkbox v-model="chooseManually" class="mt-15" label="手动选择时间" />
-        </nya-container>
-
-        <nya-container v-show="results" title="结果">
-            <pre>{{ results }}</pre>
+            <client-only>
+                <label class="input-title">北京时间</label>
+                <date-picker v-model="date" type="datetime" class="nya-input date-picker mt-15" format="YYYY-MM-DD hh:mm:ss" confirm :editable="true" placeholder="选择日期" :default-value="defaultValue" value-type="timestamp" @change="onDateChange"/>
+            </client-only>
+            <nya-input v-model.trim="timestampSec" fullwidth type="number" :label="`时间戳(秒)`" :placeholder="`时间戳(秒)`" autocomplete="off" @change="onTimestampSecChange"/>
+            <nya-input v-model.trim="timestampMsec" fullwidth type="number" :label="`时间戳(毫秒)`" :placeholder="`时间戳(毫秒)`" autocomplete="off" @change="onTimestampMsecChange"/>
+            <button type="button" class="nya-btn" @click="setCurrent">
+                {{ '当前时间' }}
+            </button>
+            <button type="button" class="nya-btn" @click="clear">
+                {{ '清空' }}
+            </button>
         </nya-container>
     </div>
 </template>
@@ -40,37 +33,39 @@ export default {
     },
     data() {
         return {
-            current: null,
-            useSec: false,
+            timestampSec: null,
+            timestampMsec: null,
             defaultValue: dayjs().format('YYYY-MM-DD'),
             date: null,
-            chooseManually: false
         };
     },
-    computed: {
-        results() {
-            if (!this.current) return false;
-            const time = this.chooseManually
-                ? this.date
-                : parseInt(this.current);
-            if (this.chooseManually) {
-                return this.date;
-            } else {
-                if (this.useSec) {
-                    return dayjs.unix(time).format('YYYY-MM-DD HH:mm:ss');
-                } else {
-                    return dayjs(time).format('YYYY-MM-DD HH:mm:ss');
-                }
-            }
-        }
-    },
     methods: {
-        setDate() {
-            if (this.useSec) {
-                this.current = dayjs().unix();
-            } else {
-                this.current = new Date().getTime();
+        onDateChange(e) {
+            if(this.date == null)
+            {
+                this.clear();
+                return;
             }
+            this.timestampSec = Math.floor(this.date / 1000);
+            this.timestampMsec = this.date;
+        },
+        onTimestampSecChange(e) {
+            this.timestampMsec = this.timestampSec * 1000;
+            this.date = this.timestampMsec;
+        },
+        onTimestampMsecChange(e) {
+            this.timestampSec = Math.floor(this.timestampMsec / 1000);
+            this.date = parseInt(this.timestampMsec);
+        },
+        setCurrent() {
+            this.timestampSec = dayjs().unix();
+            this.timestampMsec = new Date().getTime();
+            this.date = this.timestampMsec;
+        },
+        clear() {
+            this.date = null;
+            this.timestampSec = null;
+            this.timestampMsec = null;
         }
     }
 };
@@ -84,11 +79,17 @@ export default {
     .nya-input {
         width: 100%;
         box-sizing: border-box;
+        margin-bottom: 15px;
         .mx-input {
             border-radius: 0;
             height: 100%;
             box-sizing: border-box;
         }
+    }
+    .input-title {
+        display: block;
+        font-size: 18px;
+        font-weight: bold;
     }
 }
 </style>
