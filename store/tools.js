@@ -154,6 +154,16 @@ export const state = () => {
                         ],
                         description: '身份证号码查询/生成'
                     }
+                },
+                {
+                    name: '现金卡格式转换',
+                    path: '/cash_card_format',
+                    head: {
+                        keywords: [
+                            '现金卡格式转换',
+                        ],
+                        description: '现金卡格式转换'
+                    }
                 }
             ]
         },
