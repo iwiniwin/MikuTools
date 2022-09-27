@@ -25,7 +25,7 @@ export default {
             }
             var copyContent = "";
             for (let index = 0; index < data.length; index++) {
-                var pair = data[index].split("\t");
+                var pair = data[index].split(/\s+/);
                 if(pair[0].length == 18 && pair[1].length == 14) {
                     copyContent += "        {";
                     copyContent += ("\n            \"card\":\"" + pair[0] + "\",");
@@ -40,7 +40,7 @@ export default {
                     }
                 }
                 else if(index != 0) {
-                    console.log("数据v异常" + data[index]);
+                    alert('转换失败，异常数据：' + data[index]);
                     return;
                 }
             }
@@ -55,7 +55,7 @@ export default {
             textarea.readOnly = 'readonly';
             textarea.style.position = 'absolute';
             textarea.style.left = '-9999px';
-            // 将要 copy 的值赋给 textarea 标签的 value 属性  
+            // 将要 copy 的值赋给 textarea 标签的 value 属性
             // 网上有些例子是赋值给innerText,这样也会赋值成功，但是识别不了\r\n的换行符，赋值给value属性就可以
             textarea.value = value;
             // 将 textarea 插入到 body 中
