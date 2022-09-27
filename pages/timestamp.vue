@@ -3,7 +3,7 @@
         <nya-container title="时间戳转换">
             <client-only>
                 <label class="input-title">北京时间</label>
-                <date-picker v-model="date" type="datetime" class="nya-input date-picker mt-15" format="YYYY-MM-DD hh:mm:ss" confirm :editable="true" placeholder="选择日期" :default-value="defaultValue" value-type="timestamp" @change="onDateChange"/>
+                <date-picker v-model="date" type="datetime" class="nya-input date-picker mt-15" format="YYYY-MM-DD HH:mm:ss" confirm :editable="true" placeholder="选择日期" :default-value="defaultValue" value-type="timestamp" @change="onDateChange"/>
             </client-only>
             <nya-input v-model.trim="timestampSec" fullwidth type="number" :label="`时间戳(秒)`" :placeholder="`时间戳(秒)`" autocomplete="off" @change="onTimestampSecChange"/>
             <nya-input v-model.trim="timestampMsec" fullwidth type="number" :label="`时间戳(毫秒)`" :placeholder="`时间戳(毫秒)`" autocomplete="off" @change="onTimestampMsecChange"/>
